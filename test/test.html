@@ -1,8 +1,20 @@
 <html>
 <body>
 <div style="width: 18%; float: left; background: gray; height: 100%; margin-right: 2%">
-	<button rel="desert">
-		<img src="images/desert.png" style="width: 100; height: 100;"/>
+	<button rel="desertw">
+		<img src="images/desertw.png" style="width: 100; height: 100;"/>
+	</button>
+	<button rel="lakew">
+		<img src="images/lakew.png" style="width: 100; height: 100;"/>
+	</button>
+	<button rel="mountainw">
+		<img src="images/mountainw.png" style="width: 100; height: 100;"/>
+	</button>
+	<button rel="forestw">
+		<img src="images/forestw.png" style="width: 100; height: 100;"/>
+	</button>
+	<button rel="neutralw">
+		<img src="images/neutralw.png" style="width: 100; height: 100;"/>
 	</button>
 </div>
 
@@ -28,8 +40,8 @@ f.render(function() {
 console.log(f)
 
 function bindDOM() {
-	$($('div')[0]).on('click', 'button[rel="desert"]', function() {
-		f.addLand('desert');
+	$($('div')[0]).on('click', 'button', function() {
+		f.addLand($(this).attr('rel'));
 	})
 }
 
