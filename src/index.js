@@ -45,6 +45,20 @@ FaeriaBoard.prototype.addLand = function(type) {
 
 		self.canvas.add(img);
 	});
+};
+FaeriaBoard.prototype.addToken = function(type) {
+	var self = this;
+	fabric.Image.fromURL('images/tokens/'+type+'.png', function(img) {
+		img.width = 130;
+		img.height = 130;
+		img.hasControls = false;
+		img.hasBorders = false;
+		
+		img.top = (self.opt.height - img.height)/2;
+		img.left = (self.opt.width - img.width)/2;
+
+		self.canvas.add(img);
+	});
 }
 
 
