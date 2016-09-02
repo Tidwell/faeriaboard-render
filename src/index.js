@@ -15,14 +15,9 @@ FaeriaBoard.prototype.render = function(cb) {
 	var self = this;
 	if (!this.canvas) { cb(new Error('No canvas to render to'), null); }
 
-	fabric.Image.fromURL('images/bg.jpg', function(img) {
-		img.evented = false;
-		img.hasControls = false;
-		img.hasBorders = false;
+	this.canvas.setBackgroundImage('images/bg.jpg');
 
-		self.canvas.add(img);
-
-		fabric.Image.fromURL('images/board.png', function(img) {
+	fabric.Image.fromURL('images/board.png', function(img) {
 			img.evented = false;
 			img.hasControls = false;
 			img.hasBorders = false;
@@ -34,7 +29,6 @@ FaeriaBoard.prototype.render = function(cb) {
 
 			if (cb) { cb(); }
 		});
-	});
 };
 
 FaeriaBoard.prototype.addLand = function(type) {
