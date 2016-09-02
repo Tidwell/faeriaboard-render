@@ -21,6 +21,7 @@ FaeriaBoard.prototype.render = function(cb) {
 			img.evented = false;
 			img.hasControls = false;
 			img.hasBorders = false;
+			img.selectable = false;
 
 			img.top = (self.opt.height - img.height)/2;
 			img.left = (self.opt.width - img.width)/2;
