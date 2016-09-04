@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "faeria-cards": "git+https://github.com/Tidwell/faeria-cards.git"
   }
 }

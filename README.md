@@ -1,13 +1,17 @@
--orb life totals
+-delete element
+
+-card image tainted canvas
+-card left-to-right zindex
 
 -token attack/health
 -token compositing
 
--card in hand
-
--faeria amount
 -wheel
 
 -drag and drop onto canvas
 
 -orb switching
+
+
+
+-serialize/deserialize
