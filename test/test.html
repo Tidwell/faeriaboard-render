@@ -1,9 +1,46 @@
 <html>
+<head>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		.tool-container {
+			width: 18%; 
+			position: absolute;
+			top: 3em;
+			left: 0;
+			background: rgba(0,0,0,.5);
+			height: 90%;
+			z-index: 10;
+			color: white;
+		}
+		.toggle {
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding: 1em;
+			font-size: 1em;
+			background: rgba(0,0,0,.5);
+			z-index: 20;
+			color: white;
+			cursor: pointer;
+		}
+		.canvas-container {
+			margin: 0 auto;
+			display: block;
+		}
+	</style>
+</head>
 <body>
-<p>
-Click to add, then drag on the map.  When done, <button data-download>Download Image</button>
-</p>
-<div style="width: 18%; float: left; background: gray; height: 100%; margin-right: 2%">
+<div class="toggle">
+	TOOLS
+</div>
+<div class="tool-container">
+	<p>
+	Click to add, then drag on the map.  When done, <button data-download>Download Image</button>
+	</p>
 	<div id="btns">
 		<button rel="desertw">
 			<img src="images/desertw.png" style="width: 100; height: 100;"/>
@@ -132,16 +169,17 @@ Click to add, then drag on the map.  When done, <button data-download>Download I
 	<button data-add>Add</button>
 </div>
 
-<div style="width: 80%; float: right;">
+<div>
 <canvas id="render-canvas" ></canvas>
 </div>
-
-<img src="images/bg.jpg" id="bg" style="display: none">
 
 <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.4/fabric.min.js"></script>
 <script src="../src/index.js"></script>
 <script>
+
+var canvasH = window.innerWidth > 1200 ? 1200 : null;
+var canvasW = window.innerHeight > 800 ? 800 : null;
 
 var f = FaeriaBoardRenderer.create({
 	canvasId: 'render-canvas',
@@ -163,8 +201,22 @@ function bindDOM() {
 	$('button[data-add]').on('click', function() {
 		f.addToken($('select').val());
 	});
-}
 
+	$('.toggle').on('click', function() {
+		var $tools = $('.tool-container');
+		console.log()
+		if ($tools.css('left').indexOf('-') > -1) {
+			return $tools.animate({
+				left: 0
+			});	
+		}
+		$tools.animate({
+			left: -$tools.width()
+		});
+	});
+
+
+}
 //will accept a canvas element passed from options
 //will set the width/height from options
 //will use defaults if no options passed
