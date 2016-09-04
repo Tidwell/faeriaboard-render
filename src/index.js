@@ -1,11 +1,22 @@
 (function() {
 
+
+var LowerImages = 3;
+
+function setNoAction(img) {
+	img.evented = false;
+	img.hasControls = false;
+	img.hasBorders = false;
+	img.selectable = false;
+}
+
 function FaeriaBoard(opt) {
 	this.opt = opt;
 	this.canvas = new fabric.Canvas(opt.canvasId);
 
 	this.canvas.setHeight(opt.height || 100);
 	this.canvas.setWidth(opt.width || 100);
+
 
 	this.landGroup = new fabric.Group([]);
 	this.wellGroup = new fabric.Group([]);
@@ -36,10 +47,7 @@ FaeriaBoard.prototype.render = function(cb) {
 	this.canvas.setBackgroundImage('images/bg.jpg');
 
 	fabric.Image.fromURL('images/board.png', function(img) {
-		img.evented = false;
-		img.hasControls = false;
-		img.hasBorders = false;
-		img.selectable = false;
+		setNoAction(img);
 
 		img.top = ((self.opt.height - img.height)/2);
 		img.left = ((self.opt.width - img.width)/2);
@@ -48,10 +56,12 @@ FaeriaBoard.prototype.render = function(cb) {
 
 		self.canvas.moveTo(img,0);
 
-		self.addWells();
-
 		if (cb) { cb(); }
 	});
+
+	self.addWells();
+
+	self.addOrbs();
 
 	self.grid = 5;
 
@@ -59,6 +69,58 @@ FaeriaBoard.prototype.render = function(cb) {
 	//   self.canvas.add(new fabric.Line([ i * self.grid, 0, i * self.grid, self.canvas.width], { stroke: '#ccc', selectable: false }));
 	//   self.canvas.add(new fabric.Line([ 0, i * self.grid, self.canvas.width, i * self.grid], { stroke: '#ccc', selectable: false }))
 	// }
+};
+
+FaeriaBoard.prototype.addOrbs = function() {
+	var self = this;
+	fabric.Image.fromURL('images/avatars/quest_002.png', function(img){
+		setNoAction(img);
+		img.width = 120;
+		img.height = 120;
+
+		img.top = ((self.opt.height - img.height))-70;
+		img.left = ((self.opt.width - img.width)/2);
+
+		self.canvas.add(img);
+
+		
+	});
+	fabric.Image.fromURL('images/orbs/OrbStructure_2.png', function(img){
+		setNoAction(img);
+		img.width = 220;
+		img.height = 220;
+
+		img.top = ((self.opt.height - img.height));
+		img.left = ((self.opt.width - img.width)/2);
+
+		self.canvas.add(img);
+
+		
+	});
+
+	fabric.Image.fromURL('images/avatars/quest_002.png', function(img){
+		setNoAction(img);
+		img.width = 120;
+		img.height = 120;
+
+		img.top = 45;
+		img.left = ((self.opt.width - img.width)/2);
+
+		self.canvas.add(img);
+
+	});
+	fabric.Image.fromURL('images/orbs/OrbStructure_3.png', function(img){
+		setNoAction(img);
+		img.width = 220;
+		img.height = 220;
+
+		img.top = 15;
+		img.left = ((self.opt.width - img.width)/2);
+
+		self.canvas.add(img);
+
+		
+	});
 };
 
 FaeriaBoard.prototype.updateZIndex = function() {
@@ -80,7 +142,7 @@ FaeriaBoard.prototype.updateZIndex = function() {
 		return 0;
 	});
 	this.landGroup._objects.forEach(function(land,i) {
-		self.canvas.moveTo(land,i+3);
+		self.canvas.moveTo(land,i+LowerImages);
 	});
 
 	this.canvas.renderAll();
@@ -149,7 +211,7 @@ FaeriaBoard.prototype.bindWellClick = function(img,top,left) {
 			isFull = true;
 		}
 	});
-}
+};
 
 
 FaeriaBoard.prototype.addWells = function() {
@@ -169,6 +231,7 @@ FaeriaBoard.prototype.addWells = function() {
 
 		self.bindWellClick(img,200,225);
 		self.canvas.sendToBack(img);
+		
 	});
 
 	fabric.Image.fromURL('images/faeriawith.png', function(img) {
@@ -185,6 +248,7 @@ FaeriaBoard.prototype.addWells = function() {
 
 		self.bindWellClick(img,200,875);
 		self.canvas.sendToBack(img);
+		
 	});
 
 	fabric.Image.fromURL('images/faeriawith.png', function(img) {
@@ -213,7 +277,6 @@ FaeriaBoard.prototype.addWells = function() {
 		img.left = 225;
 		self.wellGroup.add(img);
 		self.canvas.add(img);
-
 		self.bindWellClick(img,480,225);
 	});
 };
