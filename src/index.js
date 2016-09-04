@@ -40,9 +40,8 @@
 			if (e.target.isWell) {
 				e.target.hoverCursor = 'pointer';
 			}
-			console.log(e.target.type)
 			if (e.target.type == 'i-text') {
-				e.target.hoverCursor = 'Text'
+				e.target.hoverCursor = 'Text';
 			}
 		});
 	}
@@ -121,7 +120,7 @@
 
 	FaeriaBoard.prototype.addOrbs = function() {
 		var self = this;
-		fabric.Image.fromURL('images/avatars/quest_002.png', function(img) {
+		fabric.Image.fromURL('images/avatars/quest_004.png', function(img) {
 			setNoAction(img);
 			img.width = 120;
 			img.height = 120;
@@ -133,7 +132,7 @@
 
 
 		});
-		fabric.Image.fromURL('images/orbs/OrbStructure_2.png', function(img) {
+		fabric.Image.fromURL('images/orbs/OrbStructure_8.png', function(img) {
 			setNoAction(img);
 			img.width = 220;
 			img.height = 220;
@@ -239,8 +238,8 @@
 	FaeriaBoard.prototype.addLand = function(type) {
 		var self = this;
 		fabric.Image.fromURL('images/' + type + '.png', function(img) {
-			img.width = 150;
-			img.height = 150;
+			img.width = 145;
+			img.height = 145;
 
 			img.top = (self.opt.height - img.height) / 2;
 			img.left = (self.opt.width - img.width) / 2;

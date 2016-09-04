@@ -1,17 +1,36 @@
--delete element
+** bugs **
+	- card image tainted canvas
 
--card image tainted canvas
--card left-to-right zindex
+** mvp features **
+	- delete element
 
--token attack/health
--token compositing
+	- token compositing
+	- token attack/health
+	- token color switching (show two icons)
 
--wheel
+	- text description
+	- url
+	- serialize/deserialize
 
--drag and drop onto canvas
+	- help dialog
 
--orb switching
+** graphics **
+	- wheel
+	- orb heart
+	- three wishes illustration? (update illustrations)
 
+** quality of life **
+	- drag and drop onto canvas
+	- card left -> right zindex
+	- search token/card
+	- card on token hover
 
+** more functions **
+	- wheel
+	- orb switching
+	- avatar switching
+	- freehand drawing
 
--serialize/deserialize
+	- opponent hand
+	- deck sizes
+
