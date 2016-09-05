@@ -16,14 +16,21 @@
 		#btns {
 			padding-top: 1em;
 		}
-		#btns img {
+		.land-draggable {
+			display: inline-block;
 			width: 80px;
 			height: 80px;
-		}
-		#btns button {
 			margin: .25em 0;
-			border: 0;
-			background: none;
+		}
+		.token-draggable.ui-draggable-dragging {
+			width: 3em;
+		}
+
+		.card-draggable.ui-draggable-dragging {
+			height: 10em;
+		}
+		.ui-draggable-dragging {
+			z-index: 100;
 		}
 		.mdl-layout__drawer {
 			width: 300px;
@@ -78,39 +85,39 @@
 
 				<div class="mdl-tabs__panel is-active" id="lands">
 					<div id="btns">
-						<button rel="desertb">
-							<img src="images/desertb.png"/>
-						</button>
-						<button rel="lakeb">
-							<img src="images/lakeb.png"/>
-						</button>
-						<button rel="mountainb">
-							<img src="images/mountainb.png"/>
-						</button>
-						<button rel="forestb">
-							<img src="images/forestb.png"/>
-						</button>
-						<button rel="neutralb">
-							<img src="images/neutralb.png"/>
-						</button>
+						
+						<img src="images/desertb.png" rel="desertb" draggable="true" class="land-draggable"/>
+						
+						
+						<img src="images/lakeb.png" rel="lakeb" draggable="true" class="land-draggable"/>
+						
+						
+						<img src="images/mountainb.png" rel="mountainb" draggable="true" class="land-draggable"/>
+						
+						
+						<img src="images/forestb.png" rel="forestb" draggable="true" class="land-draggable"/>
+						
+						
+						<img src="images/neutralb.png" rel="neutralb" draggable="true" class="land-draggable"/>
+						
 
 						<hr />
 
-						<button rel="desertw">
-							<img src="images/desertw.png"/>
-						</button>
-						<button rel="lakew">
-							<img src="images/lakew.png"/>
-						</button>
-						<button rel="mountainw">
-							<img src="images/mountainw.png"/>
-						</button>
-						<button rel="forestw">
-							<img src="images/forestw.png"/>
-						</button>
-						<button rel="neutralw">
-							<img src="images/neutralw.png"/>
-						</button>
+						
+						<img src="images/desertw.png" rel="desertw" draggable="true" class="land-draggable"/>
+						
+						
+						<img src="images/lakew.png" rel="lakew" draggable="true" class="land-draggable"/>
+						
+						
+						<img src="images/mountainw.png" rel="mountainw" draggable="true" class="land-draggable"/>
+						
+						
+						<img src="images/forestw.png" rel="forestw" draggable="true" class="land-draggable"/>
+						
+						
+						<img src="images/neutralw.png" rel="neutralw" draggable="true" class="land-draggable"/>
+						
 					</div>
 				</div>
 				<div class="mdl-tabs__panel" id="cards-tokens">
@@ -134,6 +141,7 @@
 	</div>
 
 	<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+	<script   src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"   integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="   crossorigin="anonymous"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.4/fabric.min.js"></script>
 	<script src="../src/index.js"></script>
 	<script src="../src/app.js"></script>

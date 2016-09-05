@@ -9,29 +9,46 @@ f.render(function() {
 
 function bindDOM() {
 	$('#btns').on('click', 'button', function() {
-		f.addLand($(this).attr('rel'));
+
 	});
+
+	$('.land-draggable').draggable({
+		revert: 'invalid',
+		helper: 'clone',
+		appendTo: 'body'
+	});
+	$('.canvas-container').droppable({
+		accept: '.land-draggable, .token-draggable, .card-draggable',
+		drop: function(event, ui) {
+			var land = $(ui.draggable).attr('rel');
+			if (land) {
+				f.addLand(land, {
+				top: $(ui.helper).offset().top - $('.canvas-container').offset().top-40,
+				left: $(ui.helper).offset().left - $('.canvas-container').offset().left-40
+			});
+			}
+			var name = $(ui.draggable).attr('data-token-name') ? $(ui.draggable).attr('data-token-name').toLowerCase().replace(/ /g, '') : null;
+			if (name) {
+				f.addToken(name, {
+					top: $(ui.helper).offset().top - $('.canvas-container').offset().top-40,
+					left: $(ui.helper).offset().left - $('.canvas-container').offset().left-40
+				});
+			}
+			var id = $(ui.draggable).attr('data-card-id');
+			if (id) {
+				f.addCard(id, {
+					top: $(ui.helper).offset().top - $('.canvas-container').offset().top-40,
+					left: $(ui.helper).offset().left - $('.canvas-container').offset().left-40
+				});
+			}
+		}
+	});
+
+		
 	$('button[data-download]').on('click', function() {
 		window.open(f.canvas.toDataURL());
 	});
-	$('button[data-add]').on('click', function() {
-		f.addToken($('select').val());
-	});
-
-	$('.toggle').on('click', function() {
-		var $tools = $('.tool-container');
-		console.log()
-		if ($tools.css('left').indexOf('-') > -1) {
-			return $tools.animate({
-				left: 0
-			});
-		}
-		$tools.animate({
-			left: -$tools.width()
-		});
-	});
-
-
+	
 	// This is a hack to replace the mdl-layout__drawer-button icon from the standard hamburger menu icon to the chat icon for our use.
 	function changeIcon() {
 		var _db = document.querySelector('.mdl-layout__drawer-button i');
@@ -47,9 +64,13 @@ function bindDOM() {
 	changeIcon();
 
 	$.getJSON('../node_modules/faeria-cards/build/output.json', function(data) {
-		data.sort(function(a,b){
-			if (a.name > b.name) { return 1; }
-			if (b.name > a.name) { return -1; }
+		data.sort(function(a, b) {
+			if (a.name > b.name) {
+				return 1;
+			}
+			if (b.name > a.name) {
+				return -1;
+			}
 			return 0;
 		})
 		var items = [];
@@ -67,7 +88,8 @@ function bindDOM() {
 			items.push(`<div class="mdl-list">
 					  <div class="mdl-list__item">
 					    <span class="mdl-list__item-primary-content">
-					      <img src="images/tokens/token_white_${name}.png" />
+					      <img src="images/tokens/token_white_${name}.png" class="token-draggable" data-token-name="token_white_${name}" />
+					      <img src="images/tokens/token_black_${name}.png" class="token-draggable" data-token-name="token_black_${name}" />
 					      <span>${val.name}</span>
 					      
 					    </span>
@@ -75,10 +97,10 @@ function bindDOM() {
 					  </div>
 					</div>`);
 
-			itemsCards.push(`<div class="mdl-list" data-card-id="${val.id}">
+			itemsCards.push(`<div class="mdl-list">
 					  <div class="mdl-list__item">
 					    <span class="mdl-list__item-primary-content">
-					      <img src="http://www.faeriadecks.com/images/card-renders/${val.id}.png"/>
+					      <img src="http://www.faeriadecks.com/images/card-renders/${val.id}.png" class="card-draggable" data-card-id="${val.id}"/>
 					      <span>${val.name}</span>
 					      
 					    </span>
@@ -94,17 +116,22 @@ function bindDOM() {
 		$('<ul/>', {
 			html: itemsCards.join('')
 		}).appendTo('#cards');
+
+
+		$('.token-draggable').draggable({
+			revert: 'invalid',
+			helper: 'clone',
+			appendTo: 'body'
+		});
+		
+
+		$('.card-draggable').draggable({
+			revert: 'invalid',
+			helper: 'clone',
+			appendTo: 'body'
+		});
+
 	});
-
-	$('#cards-tokens').on('click', '.mdl-list', function() {
-		var name = $(this).find('span')[1].innerText.toLowerCase().replace(/ /g, '');
-		f.addToken('token_white_'+name);
-	})
-
-	$('#cards').on('click', '.mdl-list', function() {
-		var id = $(this).attr('data-card-id');
-		f.addCard(id);
-	})
 }
 //will accept a canvas element passed from options
 //will set the width/height from options

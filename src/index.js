@@ -16,6 +16,11 @@
 		img.selectable = false;
 	}
 
+	function noControls(img) {
+		img.hasControls = false;
+		img.hasBorders = false;
+	}
+
 	function FaeriaBoard(opt) {
 		this.opt = opt;
 		this.canvas = new fabric.Canvas(opt.canvasId);
@@ -241,49 +246,62 @@
 		this.canvas.renderAll();
 	};
 
-	FaeriaBoard.prototype.addLand = function(type) {
+	FaeriaBoard.prototype.addLand = function(type, offsetObj) {
 		var self = this;
 		fabric.Image.fromURL('images/' + type + '.png', function(img) {
 			img.width = 145;
 			img.height = 145;
 
-			img.top = (self.opt.height - img.height) / 2;
-			img.left = (self.opt.width - img.width) / 2;
+			if (offsetObj) {
+				img.top = offsetObj.top;
+				img.left = offsetObj.left;
+			} else {
+				img.top = (self.opt.height - img.height) / 2;
+				img.left = (self.opt.width - img.width) / 2;
+			}
 
 			self.landGroup.add(img);
 			self.canvas.add(img);
-			img.hasControls = false;
-			img.hasBorders = false;
+			noControls(img);
 			img.lockRotation = true;
 
 			self.updateZIndex();
 		});
 	};
-	FaeriaBoard.prototype.addToken = function(type) {
+	FaeriaBoard.prototype.addToken = function(type, offsetObj) {
 		var self = this;
 		fabric.Image.fromURL('images/tokens/' + type + '.png', function(img) {
 			img.width = 130;
 			img.height = 130;
-			img.hasControls = false;
-			img.hasBorders = false;
+			noControls(img);
 
-			img.top = (self.opt.height - img.height) / 2;
-			img.left = (self.opt.width - img.width) / 2;
-
+			if (offsetObj) {
+				img.top = offsetObj.top;
+				img.left = offsetObj.left;
+			} else {
+				img.top = (self.opt.height - img.height) / 2;
+				img.left = (self.opt.width - img.width) / 2;
+			}
+			
 			self.canvas.add(img);
 		});
 	};
 
-	FaeriaBoard.prototype.addCard = function(type) {
+	FaeriaBoard.prototype.addCard = function(type, offsetObj) {
 		var self = this;
 		fabric.Image.fromURL('http://www.faeriadecks.com/images/card-renders/'+type+'.png', function(img) {
 			img.width = 250;
 			img.height = 250;
-			img.hasControls = false;
-			img.hasBorders = false;
+			noControls(img);
 
-			img.top = (self.opt.height - img.height) / 2;
-			img.left = (self.opt.width - img.width) / 2;
+			
+			if (offsetObj) {
+				img.top = offsetObj.top;
+				img.left = offsetObj.left;
+			} else {
+				img.top = (self.opt.height - img.height) / 2;
+				img.left = (self.opt.width - img.width) / 2;
+			}
 
 			self.canvas.add(img);
 		});

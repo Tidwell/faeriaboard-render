@@ -20,7 +20,6 @@
 	- three wishes illustration? (update illustrations)
 
 ** quality of life **
-	- drag and drop onto canvas
 	- card left -> right zindex
 	- search token/card
 	- card on token hover
