@@ -10,6 +10,12 @@
 		img.selectable = false;
 	}
 
+	function makeNotSelectable(img) {
+		img.hasControls = false;
+		img.hasBorders = false;
+		img.selectable = false;
+	}
+
 	function FaeriaBoard(opt) {
 		this.opt = opt;
 		this.canvas = new fabric.Canvas(opt.canvasId);
@@ -325,9 +331,7 @@
 		fabric.Image.fromURL('images/faeriawith.png', function(img) {
 			img.width = 100;
 			img.height = 200;
-			img.hasControls = false;
-			img.hasBorders = false;
-			img.selectable = false;
+			makeNotSelectable(img);
 
 			img.top = 200;
 			img.left = 225;
@@ -342,9 +346,7 @@
 		fabric.Image.fromURL('images/faeriawith.png', function(img) {
 			img.width = 100;
 			img.height = 200;
-			img.hasControls = false;
-			img.hasBorders = false;
-			img.selectable = false;
+			makeNotSelectable(img);
 
 			img.top = 200;
 			img.left = 875;
@@ -359,9 +361,7 @@
 		fabric.Image.fromURL('images/faeriawith.png', function(img) {
 			img.width = 100;
 			img.height = 200;
-			img.hasControls = false;
-			img.hasBorders = false;
-			img.selectable = false;
+			makeNotSelectable(img);
 
 			img.top = 480;
 			img.left = 875;
@@ -374,9 +374,7 @@
 		fabric.Image.fromURL('images/faeriawith.png', function(img) {
 			img.width = 100;
 			img.height = 200;
-			img.hasControls = false;
-			img.hasBorders = false;
-			img.selectable = false;
+			makeNotSelectable(img);
 
 			img.top = 480;
 			img.left = 225;
