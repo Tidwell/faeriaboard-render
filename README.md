@@ -1,12 +1,20 @@
+Install
+
+``npm install``
+
+Run
+
+``npm start``
+``http://localhost:9898/test/test.html``
+
 ** bugs **
-	- card image tainted canvas
+
 
 ** mvp features **
 	- delete element
 
 	- token compositing
-	- token attack/health
-	- token color switching (show two icons)
+	- token attack/health editing
 
 	- text description
 	- url
@@ -23,6 +31,7 @@
 	- card left -> right zindex
 	- search token/card
 	- card on token hover
+	- reset button
 
 ** more functions **
 	- wheel
@@ -32,4 +41,3 @@
 
 	- opponent hand
 	- deck sizes
-

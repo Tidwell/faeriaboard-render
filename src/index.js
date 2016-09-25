@@ -122,8 +122,8 @@
 			setNoAction(img);
 			img.width = 250;
 			img.height = 250;
-			img.top = ((self.opt.height - img.height)) +25;
-			img.left = self.opt.width-img.width +25;
+			img.top = ((self.opt.height - img.height)) + 25;
+			img.left = self.opt.width - img.width + 25;
 
 			self.canvas.add(img);
 		});
@@ -171,7 +171,7 @@
 				img.height = 60;
 
 				img.top = 90;
-				img.left = ((self.opt.width - img.width) / 2)+70;
+				img.left = ((self.opt.width - img.width) / 2) + 70;
 
 				self.canvas.add(img);
 
@@ -180,7 +180,7 @@
 					fill: 'white',
 					fontSize: 35,
 					fontWeight: 'bold',
-					left: (self.opt.width/ 2)+45,
+					left: (self.opt.width / 2) + 45,
 					top: 95,
 				});
 				self.canvas.add(txt);
@@ -203,8 +203,8 @@
 				img.width = 60;
 				img.height = 60;
 
-				img.top = self.opt.height -150;
-				img.left = ((self.opt.width - img.width) / 2)+70;
+				img.top = self.opt.height - 150;
+				img.left = ((self.opt.width - img.width) / 2) + 70;
 
 				self.canvas.add(img);
 
@@ -213,8 +213,8 @@
 					fill: 'white',
 					fontSize: 35,
 					fontWeight: 'bold',
-					left: (self.opt.width/ 2)+50,
-					top: self.opt.height-145,
+					left: (self.opt.width / 2) + 50,
+					top: self.opt.height - 145,
 				});
 				self.canvas.add(txt);
 			});
@@ -275,26 +275,53 @@
 			img.height = 130;
 			noControls(img);
 
+			var top;
+			var left;
 			if (offsetObj) {
-				img.top = offsetObj.top;
-				img.left = offsetObj.left;
+				top = offsetObj.top;
+				left = offsetObj.left;
 			} else {
-				img.top = (self.opt.height - img.height) / 2;
-				img.left = (self.opt.width - img.width) / 2;
+				top = (self.opt.height - img.height) / 2;
+				left = (self.opt.width - img.width) / 2;
 			}
-			
-			self.canvas.add(img);
+
+			var name = type.replace('token_', '').replace('black_', '').replace('white_', '');
+			console.log(name, window.FAERIACARDS[name].attack, window.FAERIACARDS[name].health)
+			var power = new fabric.IText(''+window.FAERIACARDS[name].attack||0, {
+				fontFamily: 'Libre Baskerville',
+				fill: 'white',
+				fontSize: 25,
+				fontWeight: 'bold',
+				top: 90,
+				left: 25
+			});
+
+			var toughness = new fabric.IText(''+window.FAERIACARDS[name].health||0, {
+				fontFamily: 'Libre Baskerville',
+				fill: 'white',
+				fontSize: 25,
+				fontWeight: 'bold',
+				top: 90,
+				left: 95
+			});
+
+			var tokenGroup = new fabric.Group([img, power, toughness], {
+				left: left,
+				top: top
+			});
+
+			self.canvas.add(tokenGroup);
 		});
 	};
 
 	FaeriaBoard.prototype.addCard = function(type, offsetObj) {
 		var self = this;
-		fabric.Image.fromURL('http://www.faeriadecks.com/images/card-renders/'+type+'.png', function(img) {
+		fabric.Image.fromURL('/card/' + type + '.png', function(img) {
 			img.width = 250;
 			img.height = 250;
 			noControls(img);
 
-			
+
 			if (offsetObj) {
 				img.top = offsetObj.top;
 				img.left = offsetObj.left;
@@ -307,7 +334,7 @@
 		});
 	};
 
-	
+
 
 	var replaceImg = new Image();
 	replaceImg.src = 'images/faeriawithout.png';

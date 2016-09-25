@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0",
+    "express-http-proxy": "^0.10.0",
     "faeria-cards": "git+https://github.com/Tidwell/faeria-cards.git"
   }
 }

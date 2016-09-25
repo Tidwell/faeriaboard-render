@@ -72,7 +72,15 @@ function bindDOM() {
 				return -1;
 			}
 			return 0;
-		})
+		});
+
+		var cardMap = {};
+		data.forEach(function(card) {
+			var name = card.name.toLowerCase().replace(/ /g, '');
+			cardMap[name] = card;
+		});
+		window.FAERIACARDS = cardMap;
+
 		var items = [];
 		var itemsCards = [];
 		$.each(data, function(key, val) {
@@ -100,7 +108,7 @@ function bindDOM() {
 			itemsCards.push(`<div class="mdl-list">
 					  <div class="mdl-list__item">
 					    <span class="mdl-list__item-primary-content">
-					      <img src="http://www.faeriadecks.com/images/card-renders/${val.id}.png" class="card-draggable" data-card-id="${val.id}"/>
+					      <img src="/card/${val.id}.png" class="card-draggable" data-card-id="${val.id}"/>
 					      <span>${val.name}</span>
 					      
 					    </span>
